@@ -7,6 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 Console.WriteLine("EntityFramework Code First");
 
+// Додати пакети NuGet:
+// Microsoft.Extensions.Configuration
+// Microsoft.Extensions.Configuration.Json
+
+
 // Завантажити конфігурацію з файлу appsettings.json
 IConfigurationRoot configuration = new ConfigurationBuilder()
     .SetBasePath(Directory.GetCurrentDirectory())
@@ -126,6 +131,7 @@ app.Run();
  *  
  */
 
+// Без DI
 
 //var connectionString = configuration.GetConnectionString("DefaultConnection");
 //var db = new BookStoreContext(
