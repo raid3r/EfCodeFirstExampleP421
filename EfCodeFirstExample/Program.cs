@@ -1,11 +1,55 @@
 ﻿
+using EfCodeFirstExample;
 using EfCodeFirstExample.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 Console.WriteLine("EntityFramework Code First");
 
+// Завантажити конфігурацію з файлу appsettings.json
+IConfigurationRoot configuration = new ConfigurationBuilder()
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-using var db = new BookStoreContext();
-db.Authors.ToList().ForEach(a => Console.WriteLine($"{a.Id} {a.FirstName} {a.LastName}"));
+
+// Конфігурація служб
+var services = new ServiceCollection();
+
+// Додати контекст бази даних до контейнера служб
+services.AddDbContext<BookStoreContext>(options => 
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+// Додати інші служби, якщо потрібно
+services.AddScoped<MyApp>();
+
+
+//// Створити провайдер служб
+var serviceProvider = services.BuildServiceProvider();
+
+//// Створити scope для отримання служб
+using var scope = serviceProvider.CreateScope();
+
+
+//// Отримати застосунок, який буде сконфігурований контекстом бази даних
+//// від провайдера служб з використанням DI
+//// Паттерн Dependency Injection
+
+var app = scope.ServiceProvider.GetRequiredService<MyApp>();
+app.Run();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,4 +125,16 @@ db.Authors.ToList().ForEach(a => Console.WriteLine($"{a.Id} {a.FirstName} {a.Las
  *  
  *  
  */
+
+
+//var connectionString = configuration.GetConnectionString("DefaultConnection");
+//var db = new BookStoreContext(
+//    new DbContextOptionsBuilder<BookStoreContext>()
+//    .UseSqlServer(connectionString)
+//    .Options
+//    );
+//db.Authors.ToList().ForEach(b => Console.WriteLine(b.FirstName));
+
+
+
 
