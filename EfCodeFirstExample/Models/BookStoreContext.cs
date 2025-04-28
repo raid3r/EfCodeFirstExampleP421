@@ -22,11 +22,6 @@ public class BookStoreContext : DbContext
     public virtual DbSet<Genre> Genres { get; set; } = null!;
     public virtual DbSet<BookSale> BookSales { get; set; } = null!;
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer("Data Source=SILVERSTONE\\SQLEXPRESS;Initial Catalog=BookShopPV421;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Fluent API configuration
@@ -53,7 +48,7 @@ public class BookStoreContext : DbContext
             .HasMaxLength(70)
             .HasColumnType("nvarchar(70)");
 
-        
+
         modelBuilder
             .Entity<Author>()
             .Property(a => a.LastName)
@@ -70,3 +65,15 @@ public class BookStoreContext : DbContext
     }
 }
 
+
+/*
+ * Fluent API 
+ * 
+ * Дописати конфігурацію для таблиці Books, Genres, BookSales
+ * назви таблиць та колонок в базі даних мають бути в нижньому регістрі
+ * наприклад
+ * book_sales
+ * author_id
+ * 
+ * 
+ */
