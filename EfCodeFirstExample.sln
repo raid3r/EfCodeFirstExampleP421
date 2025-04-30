@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCodeFirstExample", "EfCodeFirstExample\EfCodeFirstExample.csproj", "{71893273-AACA-4DC9-9C2A-2B6D5601C43D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DapperExample", "DapperExample\DapperExample.csproj", "{A0C108E0-F0F3-441F-97C2-CD6573E52519}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{71893273-AACA-4DC9-9C2A-2B6D5601C43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71893273-AACA-4DC9-9C2A-2B6D5601C43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71893273-AACA-4DC9-9C2A-2B6D5601C43D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C108E0-F0F3-441F-97C2-CD6573E52519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C108E0-F0F3-441F-97C2-CD6573E52519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C108E0-F0F3-441F-97C2-CD6573E52519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C108E0-F0F3-441F-97C2-CD6573E52519}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
