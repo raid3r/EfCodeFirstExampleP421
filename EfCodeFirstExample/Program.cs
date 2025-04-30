@@ -11,6 +11,9 @@ Console.WriteLine("EntityFramework Code First");
 // Microsoft.Extensions.Configuration
 // Microsoft.Extensions.Configuration.Json
 
+// Directory.GetCurrentDirectory() - отримати поточну директорію
+
+// 
 
 // Завантажити конфігурацію з файлу appsettings.json
 IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -19,30 +22,60 @@ IConfigurationRoot configuration = new ConfigurationBuilder()
     .Build();
 
 
+var name = configuration["MyName"];
+Console.WriteLine($"My name is {name}");
+
+var lastName = configuration["User:LastName"];
+Console.WriteLine($"My last name is {lastName}");
+
+var connectionString = configuration.GetConnectionString("ReserveConnection");  
+
 // Конфігурація служб
 var services = new ServiceCollection();
 
-// Додати контекст бази даних до контейнера служб
-services.AddDbContext<BookStoreContext>(options => 
+//// Додати контекст бази даних до контейнера служб
+services.AddDbContext<BookStoreContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-// Додати інші служби, якщо потрібно
-services.AddScoped<MyApp>();
+//// Додати інші служби, якщо потрібно
+services.AddScoped<MyApp>(); // new MyApp
+
+services.AddScoped<AuthorPrinter>(); // new AuthorPrinter
+
+// Transient - кожен раз новий екземпляр
+// Scoped - один екземпляр на запит (scope)
+// Singleton - один екземпляр на все життя програми
 
 
-//// Створити провайдер служб
+////// Створити провайдер служб
 var serviceProvider = services.BuildServiceProvider();
 
-//// Створити scope для отримання служб
+////// Створити scope для отримання служб
 using var scope = serviceProvider.CreateScope();
 
 
-//// Отримати застосунок, який буде сконфігурований контекстом бази даних
-//// від провайдера служб з використанням DI
-//// Паттерн Dependency Injection
+////// Отримати застосунок, який буде сконфігурований контекстом бази даних
+////// від провайдера служб з використанням DI
+////// Паттерн Dependency Injection
 
 var app = scope.ServiceProvider.GetRequiredService<MyApp>();
 app.Run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
